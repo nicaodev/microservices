@@ -4,7 +4,7 @@
 
 namespace GeekShop.ProductAPI.Migrations
 {
-    public partial class AddProductDataTableOnDB : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

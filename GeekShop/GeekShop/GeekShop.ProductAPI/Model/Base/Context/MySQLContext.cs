@@ -12,5 +12,5 @@ public class MySQLContext : DbContext
     {
     }
 
-    public DbSet<Product> Products { get; }
+    public DbSet<Product> Products { get; set; }
 }
