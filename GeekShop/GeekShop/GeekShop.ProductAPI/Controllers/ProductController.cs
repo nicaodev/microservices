@@ -26,7 +26,7 @@ public class ProductController : ControllerBase
     public async Task<ActionResult<ProductVO>> FindById(long id)
     {
         var product = await _repository.FindByIdAsync(id);
-        if (product is null) return NotFound();
+        if (product.Id <= 0) return NotFound();
         return Ok(product);
     }
 
