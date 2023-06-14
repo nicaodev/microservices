@@ -1,6 +1,7 @@
 using AutoMapper;
 using GeekShop.CartAPI.AutoMapperConfig;
 using GeekShop.CartAPI.Model.Base.Context;
+using GeekShop.CartAPI.Model.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,9 @@ IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 
 var app = builder.Build();
 
