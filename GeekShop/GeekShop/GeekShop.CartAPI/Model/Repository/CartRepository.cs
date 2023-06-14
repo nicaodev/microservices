@@ -28,7 +28,14 @@ public class CartRepository : ICartRepository
 
     public async Task<CartDto> FindCartByUserId(string userId)
     {
-        throw new NotImplementedException();
+        Cart cart = new()
+        {
+            CartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
+        };
+
+        cart.CartDetails = _context.CartDetails.Where(x => x.CartHeaderId == cart.CartHeader.Id).Include(x => x.Product);
+
+        return _mapper.Map<CartDto>(cart);
     }
 
     public async Task<bool> RemoveCoupon(string userId)
