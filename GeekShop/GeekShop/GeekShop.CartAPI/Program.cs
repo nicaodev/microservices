@@ -12,11 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<MySQLContext>(opt => opt.UseSqlServer(connection));
-
 
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 
