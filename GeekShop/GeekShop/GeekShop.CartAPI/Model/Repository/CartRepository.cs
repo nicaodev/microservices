@@ -106,7 +106,7 @@ public class CartRepository : ICartRepository
 
             if (cartDetail is null)
             {
-                cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
+                cart.CartDetails.FirstOrDefault().CartHeaderId = cartHeader.Id;
                 cart.CartDetails.FirstOrDefault().Product = null; // Null pq já foi inserido no contexto o product, acima.
                 _context.CartDetails.Add(cart.CartDetails.FirstOrDefault());
 
