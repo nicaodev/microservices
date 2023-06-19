@@ -1,4 +1,4 @@
-﻿using GeekShop.CartAPI.Model.Context;
+﻿using GeekShop.CartAPI.Model.Base;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 

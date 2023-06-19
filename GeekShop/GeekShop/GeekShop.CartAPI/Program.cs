@@ -2,6 +2,7 @@ using AutoMapper;
 using GeekShop.CartAPI.AutoMapperConfig;
 using GeekShop.CartAPI.Model.Base.Context;
 using GeekShop.CartAPI.Model.Repository;
+using GeekShop.CartAPI.RabbitMQSender;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+
+builder.Services.AddSingleton<IRabbitMQSender, RabbitMQSender>();
 
 var app = builder.Build();
 
