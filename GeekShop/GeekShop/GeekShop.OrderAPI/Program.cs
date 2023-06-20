@@ -1,3 +1,4 @@
+using GeekShop.CartAPI.Model.Repository;
 using GeekShop.OrderAPI.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,13 @@ builder.Services.AddSwaggerGen();
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<MySQLContext>(opt => opt.UseSqlServer(connection));
+
+builder.Services.AddDbContext<MySQLContext>(opt => opt.UseSqlServer(connection));
+
+var DbContextOptionsBuilder = new DbContextOptionsBuilder<MySQLContext>();
+DbContextOptionsBuilder.UseSqlServer(connection);
+
+builder.Services.AddSingleton(new OrderRepository(DbContextOptionsBuilder.Options));
 
 var app = builder.Build();
 
