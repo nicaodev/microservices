@@ -18,5 +18,5 @@ public class CheckoutHeaderDto : BaseMessage
     public string CVV { get; set; }
     public string ExpiryMothYear { get; set; }
     public int CartTotalItens { get; set; }
-    public IEnumerable<CartDetailDto> CartDetails { get; set; }
+    public List<OrderDetailDto> CartDetails { get; set; }
 }

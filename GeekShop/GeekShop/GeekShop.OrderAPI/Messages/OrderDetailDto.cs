@@ -1,6 +1,6 @@
 ﻿namespace GeekShop.OrderAPI.Messages;
 
-public class CartDetailDto
+public class OrderDetailDto
 {
     public long Id { get; set; }
     public long CartHeaderId { get; set; }
