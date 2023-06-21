@@ -96,6 +96,8 @@ public class CartController : ControllerBase
 
         _rabbitMQSender.SendMessage(dto, "checkoutqueue");
 
+        await _cartRepository.ClearCart(dto.UserId);
+
         return Ok(dto);
     }
 }
