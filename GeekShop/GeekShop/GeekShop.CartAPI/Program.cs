@@ -15,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+var connection2 = builder.Configuration.GetSection("ApisServices:CouponAPI").Value;
 
 builder.Services.AddDbContext<MySQLContext>(opt => opt.UseSqlServer(connection));
 
@@ -23,10 +24,12 @@ IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 
 builder.Services.AddSingleton<IRabbitMQSender, RabbitMQSender>();
+
+builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(s => s.BaseAddress = new Uri(builder.Configuration.GetSection("ApisServices:CouponAPI").Value)); // Injeção do repositorio Coupon
 
 var app = builder.Build();
 
