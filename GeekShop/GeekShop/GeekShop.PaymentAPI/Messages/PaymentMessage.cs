@@ -2,7 +2,7 @@
 
 namespace GeekShop.PaymentAPI.Messages;
 
-public class PaymentDto : BaseMessage
+public class PaymentMessage : BaseMessage
 {
     public long OrderId { get; set; }
     public string Name { get; set; }
