@@ -13,6 +13,8 @@ public class RabbitMQSender : IRabbitMQSender
     private readonly string _userName;
     private IConnection _connection;
 
+    private const string ExchangeName = "FanoutPaymentUpdateExchange";
+
     public RabbitMQSender()
     {
         _hostName = "localhost";
@@ -20,15 +22,18 @@ public class RabbitMQSender : IRabbitMQSender
         _userName = "guest";
     }
 
-    public void SendMessage(BaseMessage message, string queueName)
+    public void SendMessage(BaseMessage message)
     {
         if (ConnectionExists())
         {
             using var channel = _connection.CreateModel();
-            channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
 
+            //channel.QueueDeclare(queue: queueName, false, false, false, arguments: null); // Fila simples RabbitMQ
+            //channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body); // Fila simples RabbitMQ
+
+            channel.ExchangeDeclare(ExchangeName, ExchangeType.Fanout, durable: false); 
             byte[] body = GetMessageAsByteArray(message);
-            channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
+            channel.BasicPublish(exchange: ExchangeName, "", basicProperties: null, body: body);
         }
     }
 
