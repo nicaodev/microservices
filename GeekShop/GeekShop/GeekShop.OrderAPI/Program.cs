@@ -17,7 +17,6 @@ var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<MySQLContext>(opt => opt.UseSqlServer(connection));
 
-builder.Services.AddDbContext<MySQLContext>(opt => opt.UseSqlServer(connection));
 
 var DbContextOptionsBuilder = new DbContextOptionsBuilder<MySQLContext>();
 DbContextOptionsBuilder.UseSqlServer(connection);
