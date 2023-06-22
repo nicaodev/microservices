@@ -1,17 +1,19 @@
-var builder = WebApplication.CreateBuilder(args);
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddOcelot();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseOcelot();
 
-app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
-app.MapControllers();
+//app.MapControllers();
 
 app.Run();
