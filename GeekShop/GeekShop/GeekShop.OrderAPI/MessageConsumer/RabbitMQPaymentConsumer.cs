@@ -44,7 +44,7 @@ public class RabbitMQPaymentConsumer : BackgroundService
         consumer.Received += (canal, evento) =>
         {
             var content = Encoding.UTF8.GetString(evento.Body.ToArray());
-            UpdatePaymentResultDto dto = JsonSerializer.Deserialize<UpdatePaymentResultDto>(content);
+            UpdatePaymentResultDto dto = JsonSerializer.Deserialize<UpdatePaymentResultDto>(content) ?? new UpdatePaymentResultDto();
             UpdatePaymentStatus(dto).GetAwaiter().GetResult();
             _channel.BasicAck(evento.DeliveryTag, false); // remove msg da lista do Manager RABBITMQ.
         };
