@@ -15,7 +15,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-var connection2 = builder.Configuration.GetSection("ApisServices:CouponAPI").Value;
 
 builder.Services.AddDbContext<MySQLContext>(opt => opt.UseSqlServer(connection));
 
